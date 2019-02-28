@@ -1,8 +1,70 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "exo1.h"
 #define N 20
 #define M 3
+
+/* Fonction qui renvoie le maximum de deux entiers*/
+int max(int a, int b){
+	if(a > b){
+		return a;
+	}
+	return b;
+}
+
+/*Fonction qui renvoie le minimum de deux entiers*/
+int min(int a, int b){
+	if(a > b){
+		return b;
+	}
+	return a;
+}
+
+/*Renvoie le coup du joueur, joue le minimum en fonction des coups possible par l'ordi au tour suivant*/
+int hypotheseJoueur(int count){
+	int a;
+	int b;
+	int c;
+	if(20 - count <= 3)
+		return -1;
+	
+	a = coupOrdi(count + 1);
+	b = coupOrdi(count + 2);
+	c = coupOrdi(count + 3);
+	
+	return min( min(a,b),c);
+}
+
+/*Renvoie le coup du joueur, joue le maximum en fonction des coups possible par le joueur au tour suivant*/
+int coupOrdi(int count){
+	int a;
+	int b;
+	int c;
+	if(20 - count <= 3)
+		return 1;
+	
+	a = hypotheseJoueur(count + 1);
+	b = hypotheseJoueur(count + 2);
+	c = hypotheseJoueur(count + 3);
+	
+	return(max( max(a,b),c));
+}
+
+int minmax(int count){
+	int a;
+	int b;
+	int c;
+	if(20 - count <= 3)
+        return 20-count;
+
+	a = hypotheseJoueur(count + 1);
+	b = hypotheseJoueur(count + 2);
+	c = hypotheseJoueur(count + 3);
+	
+	return max(1,max(max(a,b),c));
+}
+
 
 /* Fonction tour de jeu pour le joueur
 *  Demande une saisie et renvoie la valeur jouée
@@ -21,9 +83,11 @@ int tourJoueur(){
 *  Tire un nombre aléatoire et renvoie la valeur jouée
 */
 int tourOrdi(int count){
+    /*
     if(count <=17)
         return rand()%M+1;
-    else return N - count;
+    else return N - count;*/
+    return count<17?coupOrdi(count):N-count;
 }
 
 /* Fonction du jeu, fait appel aux fonctions de tours de jeu
