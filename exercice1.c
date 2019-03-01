@@ -21,7 +21,7 @@ int min(int a, int b){
 	return a;
 }
 
-/*Renvoie le coup du joueur, joue le maximum en fonction des coups possible par l'ordi au tour suivant*/
+/*Renvoie le coup du joueur, joue le minimum en fonction des coups possible par l'ordi au tour suivant*/
 int hypotheseJoueur(int count){
 	int a;
 	int b;
@@ -36,7 +36,7 @@ int hypotheseJoueur(int count){
 	return max(max(a,b),c);
 }
 
-/*Renvoie le coup du joueur, joue le minimum en fonction des coups possible par le joueur au tour suivant*/
+/*Renvoie le coup du joueur, joue le minmaximum en fonction des coups possible par le joueur au tour suivant*/
 int coupOrdi(int count){
 	int a;
 	int b;
