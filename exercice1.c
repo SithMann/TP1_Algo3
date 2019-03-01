@@ -21,48 +21,52 @@ int min(int a, int b){
 	return a;
 }
 
-/*Renvoie le coup du joueur, joue le minimum en fonction des coups possible par l'ordi au tour suivant*/
+/*Renvoie le coup du joueur, joue le maximum en fonction des coups possible par l'ordi au tour suivant*/
 int hypotheseJoueur(int count){
 	int a;
 	int b;
 	int c;
-	if(20 - count <= 3)
+	if(N - count <= 3)
 		return -1;
 	
 	a = coupOrdi(count + 1);
 	b = coupOrdi(count + 2);
 	c = coupOrdi(count + 3);
 	
-	return min( min(a,b),c);
+	return max(max(a,b),c);
 }
 
-/*Renvoie le coup du joueur, joue le maximum en fonction des coups possible par le joueur au tour suivant*/
+/*Renvoie le coup du joueur, joue le minimum en fonction des coups possible par le joueur au tour suivant*/
 int coupOrdi(int count){
 	int a;
 	int b;
 	int c;
-	if(20 - count <= 3)
+	if(N - count <= 3)
 		return 1;
 	
 	a = hypotheseJoueur(count + 1);
 	b = hypotheseJoueur(count + 2);
 	c = hypotheseJoueur(count + 3);
 	
-	return(max( max(a,b),c));
+	return(min(min(a,b),c));
 }
 
 int minmax(int count){
 	int a;
 	int b;
 	int c;
-	if(20 - count <= 3)
-        return 20-count;
+	if(N - count <= 3)
+        return N-count;
 
 	a = hypotheseJoueur(count + 1);
 	b = hypotheseJoueur(count + 2);
 	c = hypotheseJoueur(count + 3);
-	
-	return max(1,max(max(a,b),c));
+
+    if(c==1) return 3;
+    if(b==1) return 2;
+    if(a==1) return 1;
+
+    return rand()%M+1;
 }
 
 
@@ -84,10 +88,12 @@ int tourJoueur(){
 */
 int tourOrdi(int count){
     /*
-    if(count <=17)
+    if(count <17)
         return rand()%M+1;
-    else return N - count;*/
-    return count<17?coupOrdi(count):N-count;
+    else return N - count;
+    */
+    return minmax(count);
+
 }
 
 /* Fonction du jeu, fait appel aux fonctions de tours de jeu
