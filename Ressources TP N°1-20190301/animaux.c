@@ -8,8 +8,13 @@
 
 static int id = 0;
 
-void affiche(t_arbre r){
+void affiche(t_arbre r, int profondeur){
 	// VOTRE CODE ICI QUESTION B
+	printf("[]");
+	for(int i = 0; i <profondeur;i++){
+		printf("%s\n", r->val.val);
+	}
+
 }
 
 
@@ -116,7 +121,7 @@ int main(int argc, char **argv)
 
 	t_arbre classif = loadClassification(fn);
 	fprintf(stderr, "Classification chargée ...\n");
-	affiche(classif); //affichage de la classification
+	affiche(classif, 10); //affichage de la classification
 
 
 	// VOTRE CODE ICI
@@ -134,6 +139,7 @@ int main(int argc, char **argv)
 			printf("%s\n", classif->val.val);
 
 		}else{
+		// si je dis non, sur le sous-arbre droit
 			classif = sad(classif);
 			if(est_feuille(classif))
 			printf("%s\n", classif->val.val);
