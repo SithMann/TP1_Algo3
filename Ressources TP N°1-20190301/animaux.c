@@ -9,7 +9,7 @@
 static int id = 0;
 
 void affiche(t_arbre r){
-	// VOTRE CODE ICI
+	// VOTRE CODE ICI QUESTION B
 }
 
 
@@ -121,6 +121,26 @@ int main(int argc, char **argv)
 
 	// VOTRE CODE ICI
 
+	char *ouinon = "oui";
+	char *answer = malloc(sizeof(char)*3);
+	do{
+		printf("%s \n", classif->val.val);
+		scanf("%s", answer);
+
+		// si je dis oui, je me place sur le sous-arbre gauche :
+		if(!strcmp(answer, ouinon)){
+			classif = sag(classif);
+			if(est_feuille(classif))
+			printf("%s\n", classif->val.val);
+
+		}else{
+			classif = sad(classif);
+			if(est_feuille(classif))
+			printf("%s\n", classif->val.val);
+		}
+	}while(!est_feuille(classif));
+
+	
 
 	return 0;
 }
