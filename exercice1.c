@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "exo1.h"
-#define N 20
+#define N 20 
 #define M 3
 
 /* Fonction qui renvoie le maximum de deux entiers*/
